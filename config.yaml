@@ -1,0 +1,50 @@
+# RAG System Configuration
+gemini:
+  api_key: "your-gemini-api-key-here"
+  model_name: "gemini-2.5-pro"  # or "gemini-1.5-flash" for higher rate limits
+  embedding_model: "models/embedding-001"
+  temperature: 0.1
+  max_tokens: 1000
+  
+  # Rate limiting (adjust based on your plan)
+  rpm_limit: 5  # 5 RPM for Pro, 15 for Flash
+  daily_limit: 100  # Daily request limit
+  request_timeout: 30
+
+# Local Embeddings Configuration
+embeddings:
+  provider: "local"  # Use local embeddings instead of Gemini
+  model_name: "all-MiniLM-L6-v2"  # Fast and efficient local model
+  embedding_dimension: 384
+
+# Vector Database Configuration
+vectordb:
+  provider: "chromadb"
+  collection_name: "documents"
+  persist_directory: "./data/vectordb"
+  
+# Document Processing
+processing:
+  chunk_size: 1000
+  chunk_overlap: 200
+  supported_formats: [".pdf", ".txt", ".md", ".docx"]
+  max_file_size_mb: 10
+
+# Retrieval Settings
+retrieval:
+  top_k: 5
+  similarity_threshold: 0.7
+  rerank_results: true
+
+# Cache Settings
+cache:
+  enabled: true
+  cache_directory: "./data/cache"
+  max_cache_size_mb: 100
+  cache_ttl_hours: 24
+
+# Logging
+logging:
+  level: "INFO"
+  log_file: "./logs/rag_system.log"
+  max_log_size_mb: 10
